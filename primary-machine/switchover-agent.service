@@ -1,0 +1,15 @@
+[Unit]
+Description=Switchover Agent (PRIMARY)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/switchover-agent.sh primary-switchover
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
