@@ -86,7 +86,7 @@ add_ip() {
     if ip addr show "$INTERFACE" | grep -qw "$ip"; then
         log "Floating IP $ip already exists on $INTERFACE"
     else
-        ip addr add "$ip/24" dev "$INTERFACE" 2>/dev/null
+        ip addr add "$ip/32" dev "$INTERFACE" 2>/dev/null
         if [ $? -eq 0 ]; then
             log "Added floating IP $ip to $INTERFACE"
         else
@@ -98,7 +98,7 @@ add_ip() {
 remove_ip() {
     local ip=$1
     if ip addr show "$INTERFACE" | grep -qw "$ip"; then
-        ip addr del "$ip/24" dev "$INTERFACE" 2>/dev/null
+        ip addr del "$ip/32" dev "$INTERFACE" 2>/dev/null
         if [ $? -eq 0 ]; then
             log "Removed floating IP $ip from $INTERFACE"
         else
